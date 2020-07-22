@@ -1,4 +1,12 @@
+const { get: getSecretOrEnvVar } = require("docker-secrets-nodejs");
 const { sendEmailsToRecipients } = require("digestible-wcag-email-sending");
+
+function getSecrets() {
+  return {
+    sendGridApiKey: getSecretOrEnvVar("dwcag_apikeys_sendgrid_sendonly"),
+    senderEmail: getSecretOrEnvVar("dwcag_emails_sender"),
+  };
+}
 
 (async function () {
   try {
@@ -20,10 +28,3 @@ const { sendEmailsToRecipients } = require("digestible-wcag-email-sending");
     console.error(error);
   }
 })();
-
-function getSecrets() {
-  return {
-    sendGridApiKey: "",
-    senderEmail: "",
-  };
-}

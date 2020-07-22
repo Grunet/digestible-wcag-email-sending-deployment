@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Grunet/digestible-wcag-email-sending-deployment#readme",
   "dependencies": {
-    "digestible-wcag-email-sending": "git+https://github.com/Grunet/digestible-wcag-email-sending.git"
+    "digestible-wcag-email-sending": "git+https://github.com/Grunet/digestible-wcag-email-sending.git",
+    "docker-secrets-nodejs": "^1.0.5"
   }
 }
