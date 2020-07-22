@@ -1,0 +1,19 @@
+{
+  "name": "digestible-wcag-email-sending-deployment",
+  "version": "0.0.1",
+  "description": "Contains scripts for deploying the email sending service to cloud hosts for periodic execution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grunet/digestible-wcag-email-sending-deployment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grunet/digestible-wcag-email-sending-deployment/issues"
+  },
+  "homepage": "https://github.com/Grunet/digestible-wcag-email-sending-deployment#readme"
+}
