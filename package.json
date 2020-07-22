@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Grunet/digestible-wcag-email-sending-deployment/issues"
   },
-  "homepage": "https://github.com/Grunet/digestible-wcag-email-sending-deployment#readme"
+  "homepage": "https://github.com/Grunet/digestible-wcag-email-sending-deployment#readme",
+  "dependencies": {
+    "digestible-wcag-email-sending": "git+https://github.com/Grunet/digestible-wcag-email-sending.git"
+  }
 }
