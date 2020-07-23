@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  email_sending:
+    build:
+      context: .
+    secrets:
+      - dwcag_apikeys_sendgrid_sendonly
+      - dwcag_emails_sender
+
+secrets:
+  dwcag_apikeys_sendgrid_sendonly:
+    file: ./secrets/sendGridApiKey
+  dwcag_emails_sender:
+    file: ./secrets/senderEmail
