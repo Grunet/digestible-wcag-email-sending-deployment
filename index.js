@@ -3,6 +3,7 @@ const { sendEmailsToRecipients } = require("digestible-wcag-email-sending");
 
 function getSecrets() {
   return {
+    //The env variable fallbacks are the uppercase versions of the secret names
     sendGridApiKey: getSecretOrEnvVar("dwcag_apikeys_sendgrid_sendonly"),
     senderEmail: getSecretOrEnvVar("dwcag_emails_sender"),
   };
