@@ -10,6 +10,6 @@ services:
 
 secrets:
   dwcag_apikeys_sendgrid_sendonly:
-    file: ./secrets/sendGridApiKey
+    file: ./secrets/sendGridApiKey.txt
   dwcag_emails_sender:
-    file: ./secrets/senderEmail
+    file: ./secrets/senderEmail.txt
