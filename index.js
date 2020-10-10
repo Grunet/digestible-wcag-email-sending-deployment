@@ -6,12 +6,19 @@ function getSecrets() {
     //The env variable fallbacks are the uppercase versions of the secret names
     sendGridApiKey: getSecretOrEnvVar("dwcag_apikeys_sendgrid_sendonly"),
     senderEmail: getSecretOrEnvVar("dwcag_emails_sender"),
+    currentSelectionServerURL: getSecretOrEnvVar(
+      "dwcag_urls_current_selection_server"
+    ),
   };
 }
 
 (async function () {
   try {
-    const { sendGridApiKey, senderEmail } = getSecrets();
+    const {
+      sendGridApiKey,
+      senderEmail,
+      currentSelectionServerURL,
+    } = getSecrets();
 
     const inputs = {
       apiKeys: {
@@ -21,6 +28,9 @@ function getSecrets() {
       },
       emails: {
         sender: senderEmail,
+      },
+      urls: {
+        currentSelectionServer: currentSelectionServerURL,
       },
     };
 

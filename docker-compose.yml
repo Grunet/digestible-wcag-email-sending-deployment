@@ -7,9 +7,12 @@ services:
     secrets:
       - dwcag_apikeys_sendgrid_sendonly
       - dwcag_emails_sender
+      - dwcag_urls_current_selection_server
 
 secrets:
   dwcag_apikeys_sendgrid_sendonly:
     file: ./secrets/sendGridApiKey.txt
   dwcag_emails_sender:
     file: ./secrets/senderEmail.txt
+  dwcag_urls_current_selection_server:
+    file: ./secrets/currentSelectionURL.txt
