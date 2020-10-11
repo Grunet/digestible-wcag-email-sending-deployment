@@ -4,6 +4,7 @@ const { sendEmailsToRecipients } = require("digestible-wcag-email-sending");
 function getSecrets() {
   return {
     //The env variable fallbacks are the uppercase versions of the secret names
+    mockSubscriberEmail: getSecretOrEnvVar("mock_subscriber_email"), //Temporary to enable local testing until the subscriber code is decoupled into its own service
     sendGridApiKey: getSecretOrEnvVar("dwcag_apikeys_sendgrid_sendonly"),
     senderEmail: getSecretOrEnvVar("dwcag_emails_sender"),
     currentSelectionServerURL: getSecretOrEnvVar(
@@ -15,12 +16,27 @@ function getSecrets() {
 (async function () {
   try {
     const {
+      mockSubscriberEmail, //Temporary to enable local testing until the subscriber code is decoupled into its own service
       sendGridApiKey,
       senderEmail,
       currentSelectionServerURL,
     } = getSecrets();
 
     const inputs = {
+      dependencies: {
+        //Temporary to enable local testing until the subscriber code is decoupled into its own service
+        getSubscribers: !!mockSubscriberEmail
+          ? function () {
+            return {
+              "subscribers": [
+                {
+                  "email": mockSubscriberEmail
+                }
+              ]
+            };
+          }
+          : undefined,
+      },
       apiKeys: {
         sendGrid: {
           sendOnly: sendGridApiKey,

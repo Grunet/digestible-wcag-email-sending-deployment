@@ -5,11 +5,14 @@ services:
     build:
       context: .
     secrets:
+      - mock_subscriber_email # Temporary to enable local testing until the subscriber code is decoupled into its own service
       - dwcag_apikeys_sendgrid_sendonly
       - dwcag_emails_sender
       - dwcag_urls_current_selection_server
 
 secrets:
+  mock_subscriber_email:
+    file: ./secrets/mockSubscriberEmail.txt # Temporary to enable local testing until the subscriber code is decoupled into its own service
   dwcag_apikeys_sendgrid_sendonly:
     file: ./secrets/sendGridApiKey.txt
   dwcag_emails_sender:
