@@ -4,49 +4,60 @@ const { sendEmailsToRecipients } = require("digestible-wcag-email-sending");
 function getSecrets() {
   return {
     //The env variable fallbacks are the uppercase versions of the secret names
-    mockSubscriberEmail: getSecretOrEnvVar("mock_subscriber_email"), //Temporary to enable local testing until the subscriber code is decoupled into its own service
     sendGridApiKey: getSecretOrEnvVar("dwcag_apikeys_sendgrid_sendonly"),
     senderEmail: getSecretOrEnvVar("dwcag_emails_sender"),
     currentSelectionServerURL: getSecretOrEnvVar(
       "dwcag_urls_current_selection_server"
     ),
+    contactsApi: {
+      cognitoInfo: {
+        username: getSecretOrEnvVar("dwcag_contacts_cognito_username"),
+        password: getSecretOrEnvVar("dwcag_contacts_cognito_password"),
+        appClientId: getSecretOrEnvVar("dwcag_contacts_cognito_appclientid"),
+        userPoolId: getSecretOrEnvVar("dwcag_contacts_cognito_userpoolid"),
+      },
+      url: getSecretOrEnvVar("dwcag_contacts_api_url"),
+    },
   };
 }
 
 (async function () {
   try {
     const {
-      mockSubscriberEmail, //Temporary to enable local testing until the subscriber code is decoupled into its own service
       sendGridApiKey,
       senderEmail,
       currentSelectionServerURL,
+      contactsApi,
     } = getSecrets();
 
     const inputs = {
-      dependencies: {
-        //Temporary to enable local testing until the subscriber code is decoupled into its own service
-        getSubscribers: !!mockSubscriberEmail
-          ? function () {
-            return {
-              "subscribers": [
-                {
-                  "email": mockSubscriberEmail
-                }
-              ]
-            };
-          }
-          : undefined,
-      },
       apiKeys: {
         sendGrid: {
           sendOnly: sendGridApiKey,
         },
       },
+      credentials: {
+        cognito: {
+          contactsApiAuth: {
+            username: contactsApi.cognitoInfo.username,
+            password: contactsApi.cognitoInfo.password,
+          },
+        },
+      },
       emails: {
         sender: senderEmail,
       },
+      ids: {
+        cognito: {
+          contactsApiAuth: {
+            appClientId: contactsApi.cognitoInfo.appClientId,
+            userPoolId: contactsApi.cognitoInfo.userPoolId,
+          },
+        },
+      },
       urls: {
         currentSelectionServer: currentSelectionServerURL,
+        contactsApi: contactsApi.url,
       },
     };
 

@@ -4,18 +4,31 @@ services:
   email_sending:
     build:
       context: .
+    network_mode: "host" # Used to connect to dependent services being run locally for testing
     secrets:
-      - mock_subscriber_email # Temporary to enable local testing until the subscriber code is decoupled into its own service
       - dwcag_apikeys_sendgrid_sendonly
       - dwcag_emails_sender
       - dwcag_urls_current_selection_server
+      - dwcag_contacts_cognito_username
+      - dwcag_contacts_cognito_password
+      - dwcag_contacts_cognito_appclientid
+      - dwcag_contacts_cognito_userpoolid
+      - dwcag_contacts_api_url
 
 secrets:
-  mock_subscriber_email:
-    file: ./secrets/mockSubscriberEmail.txt # Temporary to enable local testing until the subscriber code is decoupled into its own service
   dwcag_apikeys_sendgrid_sendonly:
     file: ./secrets/sendGridApiKey.txt
   dwcag_emails_sender:
     file: ./secrets/senderEmail.txt
   dwcag_urls_current_selection_server:
     file: ./secrets/currentSelectionURL.txt
+  dwcag_contacts_cognito_username:
+    file: ./secrets/cognitoUsername.txt
+  dwcag_contacts_cognito_password:
+    file: ./secrets/cognitoPassword.txt
+  dwcag_contacts_cognito_appclientid:
+    file: ./secrets/cognitoAppClientId.txt
+  dwcag_contacts_cognito_userpoolid:
+    file: ./secrets/cognitoUserPoolId.txt
+  dwcag_contacts_api_url:
+    file: ./secrets/contactsApiURL.txt
